@@ -1,4 +1,4 @@
-#define THRESHOLD 100
+#define THRESHOLD 80
 #define SWITCH A3
 #define POWER 10
 #define DEBUGx
@@ -36,9 +36,16 @@ bool isPressed() {
 #endif
 
   if (val < THRESHOLD )
-    return true;
-  else
-    return false;
+  {
+    delay(10);
+    val = analogRead(SWITCH);
+    if (val < THRESHOLD )
+    {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 void DELAYTIMING (int t)
