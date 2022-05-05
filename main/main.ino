@@ -1,6 +1,8 @@
-#define THRESHOLD 80
+#define THRESHOLD 50
 #define SWITCH A3
-#define POWER 10
+#define POWER1 10
+#define POWER2 6
+#define POWER3 5
 #define DEBUGx
 #define RUNTIME 25 // minutes
 
@@ -8,7 +10,10 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   pinMode(SWITCH, INPUT_PULLUP);
-  pinMode(POWER, OUTPUT);
+  pinMode(POWER1, OUTPUT);
+  pinMode(POWER2, OUTPUT);
+  pinMode(POWER3, OUTPUT);
+
   pinMode(13, OUTPUT);
   Serial.print("Tesing tank\n");
 
@@ -19,10 +24,14 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   if (isPressed()) {
-    digitalWrite(POWER, HIGH);
+    digitalWrite(POWER1, HIGH);
+    digitalWrite(POWER2, HIGH);
+    digitalWrite(POWER3, HIGH);
     digitalWrite(13, HIGH);
     DELAYTIMING(RUNTIME); // delay to keep the motor running
-    digitalWrite(POWER, LOW);
+    digitalWrite(POWER1, LOW);
+    digitalWrite(POWER2, LOW);
+    digitalWrite(POWER3, LOW);
     digitalWrite(13, LOW);
   }
 }
