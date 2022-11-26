@@ -1,10 +1,10 @@
-#define THRESHOLD 50
+#define THRESHOLD 30
 #define SWITCH A3
 #define POWER1 10
 #define POWER2 6
 #define POWER3 5
 #define DEBUGx
-#define RUNTIME 25 // minutes
+#define RUNTIME 25  // minutes
 
 void setup() {
   // put your setup code here, to run once:
@@ -17,7 +17,7 @@ void setup() {
   pinMode(13, OUTPUT);
   Serial.print("Tesing tank\n");
 
-  delay (2000);
+  delay(2000);
 }
 
 void loop() {
@@ -28,7 +28,7 @@ void loop() {
     digitalWrite(POWER2, HIGH);
     digitalWrite(POWER3, HIGH);
     digitalWrite(13, HIGH);
-    DELAYTIMING(RUNTIME); // delay to keep the motor running
+    DELAYTIMING(RUNTIME);  // delay to keep the motor running
     digitalWrite(POWER1, LOW);
     digitalWrite(POWER2, LOW);
     digitalWrite(POWER3, LOW);
@@ -44,12 +44,13 @@ bool isPressed() {
   Serial.println(val);
 #endif
 
-  if (val < THRESHOLD )
-  {
-    delay(10);
+  if (val < THRESHOLD) {
+    delay(100);
     val = analogRead(SWITCH);
-    if (val < THRESHOLD )
-    {
+#ifdef DEBUG
+    Serial.println(val);
+#endif
+    if (val < THRESHOLD) {
       return true;
     }
   }
@@ -57,11 +58,9 @@ bool isPressed() {
   return false;
 }
 
-void DELAYTIMING (int t)
-{
+void DELAYTIMING(int t) {
   t = t * 60;
-  for (int i = 0; i < t; i++)
-  {
-    delay(1000); // as delay is 1000 mili second use minute value as parameter
+  for (int i = 0; i < t; i++) {
+    delay(1000);  // as delay is 1000 mili second use minute value as parameter
   }
 }
