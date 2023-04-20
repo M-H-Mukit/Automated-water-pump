@@ -3,6 +3,7 @@
 #define POWER1 10
 #define POWER2 6
 #define POWER3 5
+#define POWER4 4
 #define DEBUGx
 #define RUNTIME 25  // minutes
 
@@ -24,17 +25,30 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   if (isPressed()) {
-    digitalWrite(POWER1, HIGH);
-    digitalWrite(POWER2, HIGH);
-    digitalWrite(POWER3, HIGH);
-    digitalWrite(13, HIGH);
+
+    turnOnMotor();
     DELAYTIMING(RUNTIME);  // delay to keep the motor running
-    digitalWrite(POWER1, LOW);
-    digitalWrite(POWER2, LOW);
-    digitalWrite(POWER3, LOW);
-    digitalWrite(13, LOW);
+    turnOffMotor();
   }
 }
+
+void turnOnMotor() {
+  digitalWrite(POWER1, HIGH);
+  digitalWrite(POWER2, HIGH);
+  digitalWrite(POWER3, HIGH);
+  digitalWrite(POWER4, HIGH);
+  digitalWrite(13, HIGH);
+
+}
+
+void turnOffMotor() {
+  digitalWrite(POWER1, LOW);
+  digitalWrite(POWER2, LOW);
+  digitalWrite(POWER3, LOW);
+  digitalWrite(POWER4, LOW);
+  digitalWrite(13, LOW);
+}
+
 
 bool isPressed() {
   int val;
